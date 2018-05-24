@@ -1,0 +1,19 @@
+/* Structure */
+table {
+    display: inline-block;
+    width: 99%;
+    max-height: 200px;
+    overflow: auto;
+  }
+th {
+  width: 50%;
+}
+
+  .mat-form-field {
+    width: 99%;
+  }
+
+div {width:100%; height:10px; background-color: white; text-align: center;}
+iframe {width:98%; height:150px;
+  position: relative;bottom: 1px;
+  }

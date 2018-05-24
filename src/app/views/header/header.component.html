@@ -1,0 +1,19 @@
+
+<mat-toolbar>
+
+<button mat-button [matMenuTriggerFor]="menu">
+  <i class="large material-icons">view_headline</i>
+</button>
+
+<div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>List</button>
+  <button mat-menu-item>Add</button>
+  <button mat-menu-item>Edit</button>
+  <button mat-menu-item>About</button>
+</mat-menu>
+</div>
+
+<span>Songs</span>
+
+</mat-toolbar>

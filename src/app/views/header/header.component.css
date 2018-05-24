@@ -1,0 +1,5 @@
+mat-toolbar > button:first-of-type {
+    position: absolute; left:0px; block-size: 0px}
+mat-toolbar {display: inline-block; 
+    text-align: center;padding: 10px;
+    background-color:rgba(48, 86, 167, 0.507);}
