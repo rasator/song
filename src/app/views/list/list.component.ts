@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MaterialModule } from '../../shared/material/material.module';
 import { MatTableDataSource } from '@angular/material';
 import {SongServiceService} from '../../services/song-service.service';
@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
 
   public songs: Array<SongClass>;
   dataSource: MatTableDataSource<SongClass>;
-  displayedColumns = ['title', 'band', 'type'];
+  displayedColumns = ['title', 'band', 'type', 'action'];
   videoUrl: SafeHtml;
 
 
@@ -31,11 +31,16 @@ export class ListComponent implements OnInit {
     this.videoUrl = '';
   }
 
-  onRowClicked(row: SongClass) {
+  onPlayClicked(row: SongClass) {
     console.log('Url clicked: ', row.getUrl());
     const unsafeUrl = 'https://www.youtube.com/embed/' + row.getUrl() 
     + '?enablejsapi=1&rel=0&playsinline=1&autoplay=1';
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
+  }
+
+  onDeleteClicked(row: SongClass) {
+    this.SongService.deleteSong(row);
+    this.dataSource = new MatTableDataSource( this.songs );
   }
 
   applyFilter(filterValue: string) {

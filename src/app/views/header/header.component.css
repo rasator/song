@@ -3,3 +3,7 @@ mat-toolbar > button:first-of-type {
 mat-toolbar {display: inline-block; 
     text-align: center;padding: 10px;
     background-color:rgba(48, 86, 167, 0.507);}
+
+.mat-button ::ng-deep .mat-button-focus-overlay {
+    background: none;}
+    

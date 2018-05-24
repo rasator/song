@@ -3,15 +3,29 @@ table {
     display: inline-block;
     width: 99%;
     max-height: 200px;
-    overflow: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; 
   }
 th {
   width: 50%;
 }
 
-  .mat-form-field {
+.mat-form-field {
     width: 99%;
-  }
+}
+
+th.mat-header-cell:last-child {text-align: right;}
+
+td :last-of-type {text-align: right;}
+
+button {
+  min-width: 55px;
+  padding: 5px 5px;
+}
+
+.mat-button ::ng-deep .mat-button-focus-overlay {
+  background: none;
+}
 
 div {width:100%; height:10px; background-color: white; text-align: center;}
 iframe {width:98%; height:150px;
