@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, NgModule} from '@angular/core';
 import { MaterialModule } from '../../shared/material/material.module';
 import { MatTableDataSource } from '@angular/material';
 import {SongServiceService} from '../../services/song-service.service';
@@ -6,6 +6,10 @@ import {ActivatedRoute} from '@angular/router';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 import {SongClass} from '../../class/song.class';
+
+@NgModule({
+  imports: []
+})
 
 @Component({
   selector: 'so-list',
