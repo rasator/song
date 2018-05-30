@@ -11,10 +11,12 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
+ key: string;
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
-  }
+    }
 
 }

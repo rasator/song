@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddComponent} from './views/add/add.component';
 import { ListComponent} from './views/list/list.component';
 import { AboutComponent} from './views/about/about.component';
+import { EditComponent} from './views/edit/edit.component';
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
     {
       path: 'add',
       component: AddComponent
+    },
+    {
+      path: 'edit/:index',
+      component: EditComponent
     },
     {
       path: 'about',

@@ -2,8 +2,10 @@ import { Component, OnInit, NgModule} from '@angular/core';
 import { MaterialModule } from '../../shared/material/material.module';
 import { MatTableDataSource } from '@angular/material';
 import {SongServiceService} from '../../services/song-service.service';
-import {ActivatedRoute} from '@angular/router';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import { FormsModule, FormControl } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {SongClass} from '../../class/song.class';
 
@@ -25,14 +27,16 @@ export class ListComponent implements OnInit {
   videoUrl: SafeHtml;
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(private _router: Router, private route: ActivatedRoute,
     private SongService: SongServiceService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,private formBuilder: FormBuilder) {
+    }
 
   ngOnInit() {
     this.songs = this.SongService.getSongs();
     this.dataSource = new MatTableDataSource( this.songs );
-    const unsafeUrl = 'https://www.youtube.com/embed/';
+    const unsafeUrl = 'https://www.youtube.com/embed/' +
+    'jhdFe3evXpk?enablejsapi=1&rel=0&playsinline=1&autoplay=1';
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
   }
 
@@ -46,6 +50,12 @@ export class ListComponent implements OnInit {
   onDeleteClicked(row: SongClass) {
     this.SongService.deleteSong(row);
     this.dataSource = new MatTableDataSource( this.songs );
+  }
+
+  onEditClicked(row: SongClass) {
+    this._router.navigate(['/edit',
+    this.songs.indexOf(row)
+    ]);
   }
 
   applyFilter(filterValue: string) {

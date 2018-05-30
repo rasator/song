@@ -11,12 +11,12 @@ import { YouTube, YouTubeItem, SearchService } from '../../services/search.servi
 })
 
 @Component({
-  selector: 'so-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css']
+  selector: 'so-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class AddComponent implements OnInit {
-public songs: Array<SongClass>;
+export class EditComponent implements OnInit {
+public song: SongClass;
 private title: string;
 private band: string;
 private type: string;
@@ -24,7 +24,8 @@ private url: string;
 public userForm: FormGroup;
 public searchForm: FormGroup;
 private search: string;
-
+private sOriginal: SongClass;
+indexOriginal: any;
 error: any;
 items: YouTubeItem[];
 brother: YouTube;
@@ -32,7 +33,8 @@ brother: YouTube;
 router: Router;
 
   constructor(private _router: Router, private songService: SongServiceService,
-    private formBuilder: FormBuilder, private youTubeService: SearchService) {
+    private formBuilder: FormBuilder, private youTubeService: SearchService,
+    private route: ActivatedRoute) {
       this.title = '';
       this.band = '';
       this.type = '';
@@ -54,6 +56,19 @@ router: Router;
   }
 
   ngOnInit() {
+    this.indexOriginal = this.route.snapshot.paramMap.get('index');
+    this.sOriginal = this.songService.getSong(this.indexOriginal);
+      this.title = this.sOriginal.getTitle();
+      this.band = this.sOriginal.getBand();
+      this.type = this.sOriginal.getType();
+      this.url = this.sOriginal.getUrl();
+
+    this.userForm.setValue({
+      title: this.title,
+      band: this.band,
+      type: this.type,
+      url: this.url
+    });
   }
 
   clear() {
@@ -61,6 +76,10 @@ router: Router;
     this.error = undefined;
     this.items = undefined;
   }
+
+  cancel() {
+    this._router.navigate(['/']);
+    }
 
   showBrother() {
     this.youTubeService.search(this.searchForm.value.search)
@@ -79,18 +98,14 @@ router: Router;
             });
   }
 
-  alta(s: SongClass) {
-    this.songService.addSong(s);
-    alert('Se ha añadido la Canción :' + s.getTitle() );
-    this.router.navigate(['/']);
-  }
-
   alEnviar() {
-    const s = new SongClass(this.userForm.value.title,
+    const sReemplazo = new SongClass(this.userForm.value.title,
                     this.userForm.value.band,
                     this.userForm.value.type,
                     this.userForm.value.url);
-    this.alta(s);
+    this.songService.changeSong(this.indexOriginal, sReemplazo);
+    this.router.navigate(['/']);
+
   }
 
 }

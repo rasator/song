@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './views/header/header.component';
 import { FooterComponent } from './views/footer/footer.component';
@@ -11,6 +13,9 @@ import { ListComponent } from './views/list/list.component';
 import { SongServiceService } from './services/song-service.service';
 import { AddComponent } from './views/add/add.component';
 import { AboutComponent } from './views/about/about.component';
+import { SearchService } from '../app/services/search.service';
+import { HttpClientModule } from '@angular/common/http';
+import { EditComponent } from './views/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -19,15 +24,17 @@ import { AboutComponent } from './views/about/about.component';
     FooterComponent,
     ListComponent,
     AddComponent,
-    AboutComponent
-  ],
+    AboutComponent,
+    EditComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    ],
-  providers: [SongServiceService],
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule],
+  providers: [SongServiceService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
