@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
 
   constructor(private _router: Router, private route: ActivatedRoute,
     private SongService: SongServiceService,
-    private sanitizer: DomSanitizer,private formBuilder: FormBuilder) {
+    private sanitizer: DomSanitizer, private formBuilder: FormBuilder) {
     }
 
   ngOnInit() {
