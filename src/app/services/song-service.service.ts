@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import {SongClass} from '../class/song.class';
 
+interface SongJSON {
+  title: string;
+  band: string;
+  type: string;
+  url: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,6 +15,7 @@ export class SongServiceService {
   public songs: Array<SongClass> = new Array<SongClass>();
 
   constructor() {
+    console.log('Array length: ' + this.songs.length);
     console.log('localstorage length: ' + localStorage.length);
     if (localStorage.length === 0) {
       const song1 = new SongClass('Brother in Arms', 'Dire Straits', 'Rock',
@@ -21,9 +29,14 @@ export class SongServiceService {
       this.addSong(song3);
       } else {
       for (let i = 0; i < localStorage.length; i++) {
-        this.songs.push(JSON.parse(window.localStorage.getItem(i.toString())));
+        let jSong: SongJSON;
+        let song: SongClass;
+        jSong = JSON.parse(window.localStorage.getItem(i.toString()));
+        song = new SongClass(jSong.title, jSong.band, jSong.type, jSong.url);
+        this.songs.push(song);
       }
     }
+    console.log('Array length tras constr: ' + this.songs.length);
   }
   getSongs(): Array<SongClass> {
       return this.songs;
@@ -37,7 +50,7 @@ export class SongServiceService {
   changeSong(indexOriginal: any, reemplazo: SongClass): boolean {
        this.songs[indexOriginal] = reemplazo;
        const index2 = this.songs.indexOf(reemplazo);
-       localStorage.setItem(indexOriginal.toString(),JSON.stringify(reemplazo));
+       localStorage.setItem(indexOriginal.toString(), JSON.stringify(reemplazo));
        if (indexOriginal === index2) { return true; } else {return false; }
   }
   addSong(s: SongClass): boolean {
@@ -56,5 +69,4 @@ export class SongServiceService {
   countSongs(): number {
       return this.songs.length;
   }
-  
 }

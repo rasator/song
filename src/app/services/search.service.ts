@@ -60,7 +60,6 @@ search(queryString: string) {
    // search?part=snippet&q=php&key=put_your_api_key_here
 
     const fullUrl = this.baseUrl + queryString + '&key=' + this.key;
-    console.log (fullUrl);
     return this.http.get<YouTube>(fullUrl);
 }
 

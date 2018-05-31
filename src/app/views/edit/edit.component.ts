@@ -57,6 +57,7 @@ router: Router;
 
   ngOnInit() {
     this.indexOriginal = this.route.snapshot.paramMap.get('index');
+    console.log('Index Fila: ' + this.indexOriginal);
     this.sOriginal = this.songService.getSong(this.indexOriginal);
       this.title = this.sOriginal.getTitle();
       this.band = this.sOriginal.getBand();
