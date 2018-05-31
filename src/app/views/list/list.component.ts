@@ -48,8 +48,9 @@ export class ListComponent implements OnInit {
   }
 
   onDeleteClicked(row: SongClass) {
-    this.SongService.deleteSong(row);
-    this.dataSource = new MatTableDataSource( this.songs );
+    if (window.confirm('Are sure you want to delete this song ?')) {
+      this.SongService.deleteSong(row);
+      this.dataSource = new MatTableDataSource( this.songs );    }
   }
 
   onEditClicked(row: SongClass) {

@@ -9,6 +9,7 @@
 <mat-menu #menu="matMenu">
   <button mat-menu-item><a routerLink="/" >List Songs</a></button>
   <button mat-menu-item><a routerLink="add" >Add Song</a></button>
+  <button mat-menu-item (click)="clearStorage()">Clear</button>
   <button mat-menu-item><a routerLink="about" >About</a></button>
 </mat-menu>
 </div>

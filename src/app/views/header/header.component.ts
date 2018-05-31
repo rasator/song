@@ -12,4 +12,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  clearStorage() {
+    if (window.confirm('Are sure you want to clear all songs from storage ?')) {
+      localStorage.clear();
+    }
+}
+
 }

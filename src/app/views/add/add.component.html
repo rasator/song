@@ -39,14 +39,14 @@
 </mat-card>
 
 <span *ngIf="brother">
-  <p>Brother All "{{brother}}"</p>
-  <p>Brother Kind "{{brother.kind}}"</p>
-  <p>Brother Items "{{brother.items}}"</p>
     <div>
     <ul>
       <li *ngFor="let item of brother.items">
-        {{item.snippet.title}} -- {{item.id.videoId}}
-         <button (click)="copy(item)">copy</button>
+        <div id="search">
+          <div class="repartir1">{{item.snippet.title}}</div>
+          <div class="repartir2">{{item.id.videoId}}</div>
+          <div class="repartir3"><button (click)="copy(item)">copy</button></div>
+        </div>
       </li>
     </ul>
   </div>

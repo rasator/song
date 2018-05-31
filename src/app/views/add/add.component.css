@@ -1,1 +1,16 @@
 mat-form-field {padding: 3px;}
+
+#search {border-bottom: solid slateblue; margin-right: 15px;}
+.repartir1 {
+    display: inline-block;
+    width: 50%;
+}
+.repartir2 {
+    display: inline-block;
+    width: 30%;
+}
+.repartir3 {
+    display: inline-block;
+    width: 20%;
+}
+.repartir3 > button { margin-bottom: 5px;}
