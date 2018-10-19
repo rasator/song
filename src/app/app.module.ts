@@ -16,6 +16,7 @@ import { AboutComponent } from './views/about/about.component';
 import { SearchService } from '../app/services/search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { EditComponent } from './views/edit/edit.component';
+import { MongoService} from '../app/services/mongo.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { EditComponent } from './views/edit/edit.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule],
-  providers: [SongServiceService, SearchService],
+  providers: [SongServiceService, SearchService, MongoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

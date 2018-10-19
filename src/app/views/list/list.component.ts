@@ -26,7 +26,6 @@ export class ListComponent implements OnInit {
   displayedColumns = ['title', 'band', 'type', 'action'];
   videoUrl: SafeHtml;
 
-
   constructor(private _router: Router, private route: ActivatedRoute,
     private SongService: SongServiceService,
     private sanitizer: DomSanitizer, private formBuilder: FormBuilder) {
