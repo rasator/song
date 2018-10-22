@@ -10,6 +10,8 @@ import { FooterComponent } from './views/footer/footer.component';
 import { MaterialModule } from './shared/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListComponent } from './views/list/list.component';
+import { LoginComponent } from './views/login/login.component';
+
 import { SongServiceService } from './services/song-service.service';
 import { AddComponent } from './views/add/add.component';
 import { AboutComponent } from './views/about/about.component';
@@ -23,6 +25,7 @@ import { MongoService} from '../app/services/mongo.service';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    LoginComponent,
     ListComponent,
     AddComponent,
     AboutComponent,

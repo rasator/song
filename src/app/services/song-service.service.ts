@@ -2,6 +2,15 @@ import { Injectable } from '@angular/core';
 import { SongClass } from '../class/song.class';
 import { MongoService} from './mongo.service';
 import { Stitch, RemoteMongoClient, StitchAuthListener, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import { ActivatedRoute, Router } from '@angular/router';
+
+interface MongoJSON {
+  _id: Object;
+  Title: string;
+  Band: string;
+  Type: string;
+  Url: string;
+}
 
 interface SongJSON {
   title: string;
@@ -15,50 +24,53 @@ interface SongJSON {
 })
 export class SongServiceService {
   public songs: Array<SongClass> = new Array<SongClass>();
-  arrayDocs: any;
+  arrayDocs: Array<MongoJSON>;
+  numberDoc: number;
+  router: Router;
 
-  constructor(private mongo: MongoService) {
+  constructor(private mongo: MongoService,
+    private _router: Router, private route: ActivatedRoute) {
+    // localStorage.clear();
+    this.router = _router;
+
     console.log('Array length: ' + this.songs.length);
     console.log('localstorage length: ' + localStorage.length);
     if (localStorage.length === 0) {
       // const song1 = new SongClass('Brother in Arms', 'Dire Straits', 'Rock',
-      // 'jhdFe3evXpk');
-      // const song2 = new SongClass('Sara', 'Fleetwood Mac', 'Pop',
-      // 'lfgyivefgHE');
-      // const song3 = new SongClass('Voyage Voyage', 'Desireless', 'Pop',
-      // '6PDmZnG8KsM');
-      // this.addSong(song1);
-      // this.addSong(song2);
-      // this.addSong(song3);
+      //  'jhdFe3evXpk');
+      //  const song2 = new SongClass('Sara', 'Fleetwood Mac', 'Pop',
+      //  'lfgyivefgHE');
+      //  const song3 = new SongClass('Voyage Voyage', 'Desireless', 'Pop',
+      //  '6PDmZnG8KsM');
+      //  this.addSong(song1);
+      //  this.addSong(song2);
+      //  this.addSong(song3);
 
-      mongo.login();
-      // mongo.insertDocument('A-ha', 'Take On Me', 'djV11Xbc914');
-      // mongo.deleteDocument('Raquel').then(result => {
-      //    console.log('Delete Nr :', result.deletedCount);
-      //    });
-      // mongo.insertDocument('Brother in Arms', 'Dire Straits',
-      // 'Rock', 'jhdFe3evXpk');
-      // mongo.insertDocument('Sara', 'Fleetwood Mac',
-      // 'Pop', 'lfgyivefgHE');
-      // mongo.insertDocument('Voyage Voyage', 'Desireless',
-      // 'Pop', '6PDmZnG8KsM');
-      // mongo.insertDocument('Take On Me', 'A-ha',
-      // 'Pop', 'djV11Xbc914');
+       mongo.login()
+       .then (() => {
+          // mongo.insertDocument('Take On Me', 'A-ha', 'Pop', 'djV11Xbc914');
+          // mongo.insertDocument('Brother in Arms', 'Dire Straits', 'Rock', 'jhdFe3evXpk');
+          // mongo.insertDocument('Sara', 'Fleetwood Mac', 'Pop', 'lfgyivefgHE');
+          // mongo.insertDocument('Voyage Voyage', 'Desireless', 'Pop', '6PDmZnG8KsM');
+           mongo.getDocuments().then(docs => {
+            this.arrayDocs = docs;
 
-      mongo.getDocuments().asArray().then(doc => {
-        this.arrayDocs = doc;
-      });
-      for (let i = 0; i < mongo.numberDoc; i++) {
-        let song: SongClass;
-        song = new SongClass(
-          this.arrayDocs.title,
-          this.arrayDocs.band,
-          this.arrayDocs.type,
-          this.arrayDocs.url);
-        this.songs.push(song);
-      }
-      console.log('Doc Names:',  this.arrayDocs );
+             for (let i = 0; i < this.arrayDocs.length; i++) {
+                let mSong: MongoJSON;
+                let song: SongClass;
+                mSong = this.arrayDocs[i];
+                song = new SongClass(mSong.Title, mSong.Band, mSong.Type, mSong.Url);
+                this.addSong(song);
+             }
 
+            console.log('Doc Names:',  this.arrayDocs );
+            console.log('Doc Lenght:',  this.arrayDocs.length );
+           });
+       });
+
+      //  mongo.deleteDocument('Raquel').then(result => {
+      //     console.log('Delete Nr :', result.deletedCount);
+      //     });
       } else {
       for (let i = 0; i < localStorage.length; i++) {
         let jSong: SongJSON;

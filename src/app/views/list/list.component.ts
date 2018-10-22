@@ -32,11 +32,13 @@ export class ListComponent implements OnInit {
     }
 
   ngOnInit() {
+
     this.songs = this.SongService.getSongs();
     this.dataSource = new MatTableDataSource( this.songs );
     const unsafeUrl = 'https://www.youtube.com/embed/' +
     'jhdFe3evXpk?enablejsapi=1&rel=0&playsinline=1&autoplay=1';
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
+
   }
 
   onPlayClicked(row: SongClass) {
