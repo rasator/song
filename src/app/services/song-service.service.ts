@@ -30,7 +30,7 @@ export class SongServiceService {
 
   constructor(private mongo: MongoService,
     private _router: Router, private route: ActivatedRoute) {
-    // localStorage.clear();
+     localStorage.clear();
     this.router = _router;
 
     console.log('Array length: ' + this.songs.length);
@@ -60,8 +60,8 @@ export class SongServiceService {
                 let song: SongClass;
                 mSong = this.arrayDocs[i];
                 song = new SongClass(mSong.Title, mSong.Band, mSong.Type, mSong.Url);
-                this.addSong(song);
-             }
+                this.songs.push(song);
+              }
 
             console.log('Doc Names:',  this.arrayDocs );
             console.log('Doc Lenght:',  this.arrayDocs.length );
@@ -72,7 +72,7 @@ export class SongServiceService {
       //     console.log('Delete Nr :', result.deletedCount);
       //     });
       } else {
-      for (let i = 0; i < localStorage.length; i++) {
+      for (let i = 0; i < (localStorage.length - 1); i++) {
         let jSong: SongJSON;
         let song: SongClass;
         jSong = JSON.parse(window.localStorage.getItem(i.toString()));
@@ -93,14 +93,26 @@ export class SongServiceService {
     return this.songs[index];
   }
   changeSong(indexOriginal: any, reemplazo: SongClass): boolean {
-       this.songs[indexOriginal] = reemplazo;
-       const index2 = this.songs.indexOf(reemplazo);
+       console.log('Titulo Original', this.songs[indexOriginal].getTitle());
+
+        this.mongo.replaceDocument(
+          this.getSong(indexOriginal).getTitle(),
+          this.getSong(indexOriginal).getBand(),
+          reemplazo.getTitle(), reemplazo.getBand(),
+          reemplazo.getType(), reemplazo.getUrl()
+        );
+
+        this.songs[indexOriginal] = reemplazo;
+        const index2 = this.songs.indexOf(reemplazo); 
        localStorage.setItem(indexOriginal.toString(), JSON.stringify(reemplazo));
        if (indexOriginal === index2) { return true; } else {return false; }
   }
   addSong(s: SongClass): boolean {
       this.songs.push(s);
       const index = this.songs.indexOf(s);
+      console.log('Index:', index.toString());
+      this.mongo.insertDocument(s.getTitle(),
+       s.getBand(), s.getType(), s.getUrl());
       localStorage.setItem(index.toString(), JSON.stringify(s));
       return true;
   }

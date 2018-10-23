@@ -87,7 +87,8 @@ export class MongoService {
     });
   }
 
-  insertDocument(title, band, type, url) {
+  insertDocument(title, band, type, url: string) {
+      console.log('Insertar Titulo:', title );
       this.coll.insertOne(
       {
        Title: title,
@@ -96,6 +97,21 @@ export class MongoService {
        Url: url}
       ).catch(err => console.error('INSERT ERROR:', err.message));
   }
+
+  replaceDocument(titleOrg, bandOrg, title, band, type, url: string) {
+    this.coll.updateOne(
+       {Title : titleOrg},
+       {'$set': {
+        Title: title,
+        Band: band,
+        Type: type,
+        Url: url}})
+        .then(result => {
+          console.log('result:',result);
+        });
+
+
+}
 
   deleteDocument(nombre) {
     return this.coll.deleteOne({

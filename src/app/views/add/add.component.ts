@@ -82,7 +82,7 @@ router: Router;
   alta(s: SongClass) {
     this.songService.addSong(s);
     alert('Se ha añadido la Canción :' + s.getTitle() );
-    this.router.navigate(['/']);
+    this.router.navigate(['list']);
   }
 
   alEnviar() {

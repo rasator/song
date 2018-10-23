@@ -79,7 +79,7 @@ router: Router;
   }
 
   cancel() {
-    this._router.navigate(['/']);
+    this._router.navigate(['list']);
     }
 
   showBrother() {
@@ -105,7 +105,7 @@ router: Router;
                     this.userForm.value.type,
                     this.userForm.value.url);
     this.songService.changeSong(this.indexOriginal, sReemplazo);
-    this.router.navigate(['/']);
+    this.router.navigate(['list']);
 
   }
 
