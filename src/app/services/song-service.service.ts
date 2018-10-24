@@ -103,7 +103,7 @@ export class SongServiceService {
         );
 
         this.songs[indexOriginal] = reemplazo;
-        const index2 = this.songs.indexOf(reemplazo); 
+        const index2 = this.songs.indexOf(reemplazo);
        localStorage.setItem(indexOriginal.toString(), JSON.stringify(reemplazo));
        if (indexOriginal === index2) { return true; } else {return false; }
   }
