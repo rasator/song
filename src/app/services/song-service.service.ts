@@ -3,6 +3,7 @@ import { SongClass } from '../class/song.class';
 import { MongoService} from './mongo.service';
 import { Stitch, RemoteMongoClient, StitchAuthListener, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 
 interface MongoJSON {
   _id: Object;
@@ -27,6 +28,8 @@ export class SongServiceService {
   arrayDocs: Array<MongoJSON>;
   numberDoc: number;
   router: Router;
+  public dataSource: MatTableDataSource<SongClass>;
+
 
   constructor(private mongo: MongoService,
     private _router: Router, private route: ActivatedRoute) {
@@ -62,6 +65,7 @@ export class SongServiceService {
                 song = new SongClass(mSong.Title, mSong.Band, mSong.Type, mSong.Url);
                 this.songs.push(song);
               }
+              this.dataSource = new MatTableDataSource( this.songs );
 
             console.log('Doc Names:',  this.arrayDocs );
             console.log('Doc Lenght:',  this.arrayDocs.length );
@@ -119,7 +123,7 @@ export class SongServiceService {
   deleteSong(s: SongClass): boolean {
        const index = this.songs.indexOf(s);
        const borrado = this.songs.splice(index, 1);
-       localStorage.removeItem(index.toString());
+       // localStorage.removeItem(index.toString());
        alert('Se ha borrado la Canción nr :' + index);
        if (borrado.length === 1) { return true; } else {return false; }
   }

@@ -22,7 +22,6 @@ import {SongClass} from '../../class/song.class';
 export class ListComponent implements OnInit {
 
   public songs: Array<SongClass>;
-  dataSource: MatTableDataSource<SongClass>;
   displayedColumns = ['title', 'band', 'type', 'action'];
   videoUrl: SafeHtml;
 
@@ -34,7 +33,7 @@ export class ListComponent implements OnInit {
   ngOnInit() {
 
     this.songs = this.SongService.getSongs();
-    this.dataSource = new MatTableDataSource( this.songs );
+    // this.dataSource = new MatTableDataSource( this.songs );
     const unsafeUrl = 'https://www.youtube.com/embed/' +
     'jhdFe3evXpk?enablejsapi=1&rel=0&playsinline=1&autoplay=1';
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
@@ -51,7 +50,8 @@ export class ListComponent implements OnInit {
   onDeleteClicked(row: SongClass) {
     if (window.confirm('Are sure you want to delete this song ?')) {
       this.SongService.deleteSong(row);
-      this.dataSource = new MatTableDataSource( this.songs );    }
+      // this.dataSource = new MatTableDataSource( this.songs ); 
+       }
   }
 
   onEditClicked(row: SongClass) {
