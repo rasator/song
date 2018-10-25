@@ -1,13 +1,12 @@
 import { Component, OnInit, NgModule} from '@angular/core';
 import { MaterialModule } from '../../shared/material/material.module';
 import { MatTableDataSource } from '@angular/material';
-import {SongServiceService} from '../../services/song-service.service';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import { SongServiceService} from '../../services/song-service.service';
+import { DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import { FormsModule, FormControl } from '@angular/forms';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import {SongClass} from '../../class/song.class';
+import { SongClass} from '../../class/song.class';
 
 @NgModule({
   imports: []
@@ -26,7 +25,7 @@ export class ListComponent implements OnInit {
   videoUrl: SafeHtml;
 
   constructor(private _router: Router, private route: ActivatedRoute,
-    private SongService: SongServiceService,
+    public SongService: SongServiceService,
     private sanitizer: DomSanitizer, private formBuilder: FormBuilder) {
     }
 

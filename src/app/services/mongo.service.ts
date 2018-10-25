@@ -15,23 +15,6 @@ export class MongoService {
 
   constructor() {
 
-      // this.client = Stitch.initializeDefaultAppClient('song-dowey');
-
-      // this.db = this.client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('SongDB');
-
-      // this.client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
-      //    this.userId = user;
-      //    this.coll = this.db.collection('SongCL'); });
-
-      // this.db.collection('SongCL').insertOne({owner_id: this.client.auth.user.id, Title: 'Take on me', Band: 'A-ha'})
-      //  .then(() =>
-      //    this.db.collection('SongCL').find({owner_id: this.client.auth.user.id}, { limit: 100}).asArray()
-      //  ).then(docs => {
-      //      console.log('Found docs', docs)
-      //      console.log('[MongoDB Stitch] Connected to Stitch');
-      //  }).catch(err => {
-      //    console.error(err);
-      //  });
    }
 
   login() {
@@ -48,28 +31,17 @@ export class MongoService {
       .then(user => {
          this.userId = user;
          this.coll = this.db.collection('SongCL');
-         console.log('Logged Status ', this.client.auth.isLoggedIn);
+         console.log('Logged Status1 ', this.client.auth.isLoggedIn);
         });
       }
 
   getDocuments() {
         console.log('Logged Status2 ', this.client.auth.isLoggedIn);
-        // this.userId = this.client.auth.user.id;
-        // this.coll = this.db.collection('SongCL');
         console.log('Client id', this.client.auth.user.id);
         console.log('Database id', this.db);
         console.log('Collection id', this.coll);
         console.log('User id', this.userId);
-      //   this.insertDocument('Brother in Arms', 'Dire Straits',
-      //  'Rock', 'jhdFe3evXpk');
-      //   this.insertDocument('Sara', 'Fleetwood Mac',
-      //  'Pop', 'lfgyivefgHE');
-      //   this.insertDocument('Voyage Voyage', 'Desireless',
-      //  'Pop', '6PDmZnG8KsM');
 
-        // this.coll.insertOne({owner_id: this.userId, name: 'Daniel'});
-        // this.coll.insertOne({owner_id: this.userId, name: 'Hector'});
-        // this.coll.insertOne({owner_id: this.userId, name: 'Sara'});
         return this.db.collection('SongCL').find({}, { limit: 100}).asArray()
         .then(docs => {
               console.log('Found docs', docs);
