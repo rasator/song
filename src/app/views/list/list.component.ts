@@ -49,8 +49,9 @@ export class ListComponent implements OnInit {
 
   onDeleteClicked(row: SongClass) {
     if (window.confirm('Are sure you want to delete this song ?')) {
+      console.log('Borrado Elemento', row);
       this.SongService.deleteSong(row);
-      // this.dataSource = new MatTableDataSource( this.songs );
+      // this.SongService.dataSource = new MatTableDataSource( this.SongService.songs );
        }
   }
 

@@ -113,14 +113,12 @@ export class MongoService {
 
 }
 
-  deleteDocument(nombre) {
-    return this.coll.deleteOne({
-      owner_id: this.userId,
-      'Nombre': nombre
+  deleteDocument(titulo) {
+    this.coll.deleteOne({
+      'Title': titulo
     }).then((result) => {
       console.log('Deleted ' + result.deletedCount + ' documents');
-      return result;
-   }).catch(err => console.error('DELETE ERROR:', err.message));
+   });
   }
 
 }

@@ -123,7 +123,11 @@ export class SongServiceService {
   deleteSong(s: SongClass): boolean {
        const index = this.songs.indexOf(s);
        const borrado = this.songs.splice(index, 1);
+       console.log('Borrar Elemento:', s.getTitle());
        // localStorage.removeItem(index.toString());
+       this.mongo.deleteDocument(s.getTitle());
+       this.dataSource = new MatTableDataSource( this.songs );
+
        alert('Se ha borrado la Canción nr :' + index);
        if (borrado.length === 1) { return true; } else {return false; }
   }
