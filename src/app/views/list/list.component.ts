@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
   onDeleteClicked(row: SongClass) {
     if (window.confirm('Are sure you want to delete this song ?')) {
       this.SongService.deleteSong(row);
-      // this.dataSource = new MatTableDataSource( this.songs ); 
+      // this.dataSource = new MatTableDataSource( this.songs );
        }
   }
 
@@ -63,7 +63,7 @@ export class ListComponent implements OnInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    this.SongService.dataSource.filter = filterValue;
   }
 }
 
