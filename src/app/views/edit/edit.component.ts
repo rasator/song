@@ -79,7 +79,7 @@ router: Router;
   }
 
   cancel() {
-    this._router.navigate(['list']);
+    this._router.navigate(['']);
     }
 
   showBrother() {

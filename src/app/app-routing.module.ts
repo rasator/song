@@ -12,10 +12,6 @@ const routes: Routes = [
       component: ListComponent
     },
     {
-      path: 'list',
-      component: ListComponent
-    },
-    {
       path: 'add',
       component: AddComponent
     },

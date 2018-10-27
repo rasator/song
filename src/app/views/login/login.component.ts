@@ -21,10 +21,6 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit() {
-    // setInterval(a => {
-    //   this.router.navigate(['list']);
-    // }, 2000, []);
-
   }
 
 }
